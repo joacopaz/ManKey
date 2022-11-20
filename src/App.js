@@ -9,6 +9,7 @@ import { selectFavorites } from "./features/favorites/favoritesSlice";
 import { Routes, Route } from "react-router-dom";
 import { Favorites } from "./features/favorites/Favorites";
 import { Post } from "./features/post/Post";
+import { Recommended } from "./features/Recommended";
 
 function App() {
 	const hasError = useSelector(selectHasError);
@@ -26,6 +27,7 @@ function App() {
 				<Route path="search" element={<Subreddits />} />
 				<Route path="/r/:subReddit" element={<SubReddit />} />
 				<Route path="/r/:subReddit/:post" element={<Post />} />
+				<Route path="/r/recommended" element={<Recommended />} />
 			</Routes>
 		</div>
 	);
