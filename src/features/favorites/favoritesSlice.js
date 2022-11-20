@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { calculateTime } from "../searchbar/searchSlice";
+import { options } from "../posts/util";
 let favs = [];
 if (
 	document.cookie.match(/favorites=(.*)/) &&
@@ -28,11 +29,7 @@ export const fetchFavorites = createAsyncThunk(
 			const fetchedFavorites = await Promise.all(
 				favorites.map(async (favorite) => {
 					const endpoint = `https://www.reddit.com/${favorite}/about.json`;
-					const response = await fetch(endpoint, {
-						mode: 'cors',
-						headers: {
-						  'Access-Control-Allow-Origin':'*'
-						}});
+					const response = await fetch(endpoint, options);
 					if (!response.ok) {
 						alert("There has been an error fetching your favorite Subreddits");
 						document.cookie = `favorites=''; expires=${new Date(

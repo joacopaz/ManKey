@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { options } from "../posts/util";
 
 export const calculateTime = (date, abbreviate) => {
 	const now = new Date();
@@ -42,11 +43,7 @@ export const fetchSubreddits = createAsyncThunk(
 	async (term) => {
 		try {
 			const endpoint = `https://www.reddit.com/search/.json?q=${term}&type=sr&count=24&limit=24`;
-			const response = await fetch(endpoint, {
-				mode: 'cors',
-				headers: {
-				  'Access-Control-Allow-Origin':'*'
-				}});
+			const response = await fetch(endpoint, options);
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) return { subReddits: [], page: 1 };
 			const children = jsonResponse.data.children;
@@ -85,11 +82,7 @@ export const fetchNextPage = createAsyncThunk(
 		const { term, nextPage, page } = args;
 		try {
 			const endpoint = `https://www.reddit.com/search/.json?q=${term}&type=sr&after=${nextPage}&count=24&limit=24`;
-			const response = await fetch(endpoint, {
-				mode: 'cors',
-				headers: {
-				  'Access-Control-Allow-Origin':'*'
-				}});
+			const response = await fetch(endpoint, options);
 			const jsonResponse = await response.json();
 			const children = jsonResponse.data.children;
 			const subReddits = children.map((sub) => {
@@ -128,11 +121,7 @@ export const fetchPrevPage = createAsyncThunk(
 		try {
 			const endpoint = `https://www.reddit.com/search/.json?q=${term}&type=sr&before=${prevPage}&count=24&limit=24`;
 
-			const response = await fetch(endpoint, {
-				mode: 'cors',
-				headers: {
-				  'Access-Control-Allow-Origin':'*'
-				}});
+			const response = await fetch(endpoint, options);
 			const jsonResponse = await response.json();
 			const children = jsonResponse.data.children;
 			const subReddits = children.map((sub) => {

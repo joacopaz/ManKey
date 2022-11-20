@@ -1,4 +1,7 @@
 import { calculateTime } from "../searchbar/searchSlice";
+
+export const options = {};
+
 export const decodeHTML = function (html) {
 	const text = document.createElement("textarea");
 	text.innerHTML = html;
@@ -18,11 +21,8 @@ export const generateRandomBackground = (percentage, ref) => {
 export const fetchImg = async (author) => {
 	if (author === "[deleted]") return null;
 	const response = await fetch(
-		`https://www.reddit.com/user/${author}/about.json`, {
-			mode: 'cors',
-			headers: {
-			  'Access-Control-Allow-Origin':'*'
-			}}
+		`https://www.reddit.com/user/${author}/about.json`,
+		options
 	);
 	const jsonResponse = await response.json();
 
@@ -255,11 +255,7 @@ export const handleComment = (data, kind) => {
 export const getMoreComments = async (parentId, id) => {
 	try {
 		const endpoint = `https://www.reddit.com/comments/${parentId}/comment/${id}.json`;
-		const comment = await fetch(endpoint, {
-			mode: 'cors',
-			headers: {
-			  'Access-Control-Allow-Origin':'*'
-			}});
+		const comment = await fetch(endpoint, options);
 		const jsonData = await comment.json();
 		return jsonData[1].data.children.map((child) => {
 			const data = handleComment(child.data);
