@@ -2,7 +2,6 @@ import { calculateTime } from "../searchbar/searchSlice";
 
 export const options = {
 	method: "GET",
-	mode: "cors",
 };
 
 export const decodeHTML = function (html) {
