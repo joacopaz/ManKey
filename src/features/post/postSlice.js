@@ -11,7 +11,11 @@ const initialState = {
 export const fetchPost = createAsyncThunk("post/fetchPost", async (post) => {
 	try {
 		const endpoint = `https://www.reddit.com/${post}.json`;
-		const response = await fetch(endpoint);
+		const response = await fetch(endpoint, {
+			mode: 'cors',
+			headers: {
+			  'Access-Control-Allow-Origin':'*'
+			}});
 		const jsonResponse = await response.json();
 		// Handle the post information logic
 		if (!jsonResponse[0]?.data) return console.error("Invalid post");

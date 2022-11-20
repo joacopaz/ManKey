@@ -39,7 +39,11 @@ export const fetchPosts = createAsyncThunk(
 				action ? `&${action}=${page[action]}` : ""
 			}`;
 			// console.log(endpoint);
-			const response = await fetch(endpoint);
+			const response = await fetch(endpoint, {
+				mode: 'cors',
+				headers: {
+				  'Access-Control-Allow-Origin':'*'
+				}});
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) return { posts: [], page: 1 };
 			const children = jsonResponse.data.children;
@@ -124,7 +128,11 @@ export const fetchSubredditInfo = createAsyncThunk(
 	async (subReddit) => {
 		try {
 			const endpoint = `https://www.reddit.com/r/${subReddit}/about.json`;
-			const response = await fetch(endpoint);
+			const response = await fetch(endpoint, {
+				mode: 'cors',
+				headers: {
+				  'Access-Control-Allow-Origin':'*'
+				}});
 			const jsonResponse = await response.json();
 			if (!jsonResponse.data) {
 				return "Invalid data";

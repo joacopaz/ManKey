@@ -18,7 +18,11 @@ export const generateRandomBackground = (percentage, ref) => {
 export const fetchImg = async (author) => {
 	if (author === "[deleted]") return null;
 	const response = await fetch(
-		`https://www.reddit.com/user/${author}/about.json`
+		`https://www.reddit.com/user/${author}/about.json`, {
+			mode: 'cors',
+			headers: {
+			  'Access-Control-Allow-Origin':'*'
+			}}
 	);
 	const jsonResponse = await response.json();
 
@@ -251,7 +255,11 @@ export const handleComment = (data, kind) => {
 export const getMoreComments = async (parentId, id) => {
 	try {
 		const endpoint = `https://www.reddit.com/comments/${parentId}/comment/${id}.json`;
-		const comment = await fetch(endpoint);
+		const comment = await fetch(endpoint, {
+			mode: 'cors',
+			headers: {
+			  'Access-Control-Allow-Origin':'*'
+			}});
 		const jsonData = await comment.json();
 		return jsonData[1].data.children.map((child) => {
 			const data = handleComment(child.data);
