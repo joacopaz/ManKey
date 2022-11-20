@@ -1,6 +1,12 @@
 import { calculateTime } from "../searchbar/searchSlice";
 
-export const options = {};
+export const options = {
+	method: "GET",
+	headers: {
+		Accept: "application/json",
+		"Content-Type": "application/json",
+	},
+};
 
 export const decodeHTML = function (html) {
 	const text = document.createElement("textarea");
