@@ -4,8 +4,7 @@ export const options = {
 	method: "GET",
 	mode: "cors",
 	headers: {
-		"Access-Control-Allow-Origin": "*",
-		Vary: "Origin",
+		"Access-Control-Allow-Origin": "*/*",
 	},
 };
 
