@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<style>
+			video::-webkit-media-controls-volume-slider {
+				display: none !important;
+			}
+
+			video::-webkit-media-controls-mute-button {
+				display: none !important;
+			}
+		</style>
+		<script>
+			async function fetchAudioAndVideo() {
+				const response = await fetch(
+					"https://www.reddit.com/r/argentina/top/.json?t=week"
+				);
+				const jsonResponse = await response.json();
+				const exampleVideo =
+					jsonResponse.data.children[24].data.media.reddit_video.fallback_url;
+				const video = {
+					videoURL: exampleVideo.match(/(.*)\?source=fallback/)[1],
+					audioURL: (
+						exampleVideo.match(/(.*)DASH_/)[1] +
+						"DASH_audio." +
+						exampleVideo.match(/\.([^.]*)$/)[1]
+					).match(/(.*)\?source=fallback/)[1],
+				};
+				document.querySelector("pre").innerText = JSON.stringify(
+					video,
+					null,
+					2
+				);
+				const videoEle = document.createElement("video");
+				const audioEle = document.createElement("audio");
+				audioEle.src = video.audioURL;
+				videoEle.src = video.videoURL;
+				videoEle.controls = true;
+				videoEle.onplay = () => document.querySelector("audio").play();
+				videoEle.onpause = () => document.querySelector("audio").pause();
+				videoEle.onseeked = (e) =>
+					(document.querySelector("audio").currentTime = e.target.currentTime);
+				// videoEle.controls = true;
+				// videoEle.width = "480";
+				// videoEle.height = "270";
+				document.body.appendChild(audioEle);
+				document.body.appendChild(videoEle);
+			}
+		</script>
+		<button onclick="fetchAudioAndVideo()">Fetch video and audio</button>
+		<pre></pre>
+	</body>
+</html>

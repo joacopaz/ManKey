@@ -1,0 +1,128 @@
+.carrouselContainer {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+.carrousel {
+	position: relative;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	width: 100%;
+}
+.carrousel .lds-ring {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+}
+.carrouselButton {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 0.3rem 0.8rem;
+	background-color: rgba(0, 0, 0, 0.719);
+	border-radius: 30px;
+	transition: background-color 100ms;
+	z-index: 300;
+	caret-color: transparent;
+	user-select: transparent;
+}
+.carrouselButton:hover {
+	background-color: rgb(93, 23, 23);
+}
+.alignLeft {
+	left: 5%;
+}
+.alignRight {
+	right: 5%;
+}
+.content.media .carrousel img {
+	position: absolute;
+	display: block;
+	max-width: 100%;
+	animation-duration: 200ms;
+}
+.content.media .carrousel .active {
+	position: relative;
+	object-fit: contain;
+}
+.content.media img.inactive.imgLeft {
+	left: -100%;
+}
+.content.media img.inactive.imgRight {
+	left: 100%;
+}
+
+.carrouselLabel {
+	position: absolute;
+	bottom: 0.2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgba(0, 0, 0, 0.73);
+	padding: 0.5rem 0.5rem;
+	z-index: 200;
+	border-radius: 10px;
+	caret-color: transparent;
+}
+.carrouselButton::selection {
+	background: none;
+}
+.carrouselLabel::-moz-selection {
+	background: none;
+}
+
+@keyframes enterRight {
+	0% {
+		opacity: 0;
+		left: 100%;
+	}
+	99% {
+		opacity: 100;
+		left: 50%;
+		transform: translate(-50%);
+	}
+	100% {
+		left: 100%;
+	}
+}
+@keyframes exitLeft {
+	0% {
+		opacity: 100;
+		left: 0%;
+	}
+	99% {
+		opacity: 0;
+		left: -100%;
+	}
+	100% {
+		opacity: 0;
+		left: 0%;
+	}
+}
+@keyframes enterLeft {
+	0% {
+		opacity: 0;
+		left: -100%;
+	}
+	99% {
+		left: 50%;
+		transform: translate(-50%);
+	}
+	100% {
+		left: -100%;
+	}
+}
+@keyframes exitRight {
+	0% {
+		opacity: 100;
+		left: 0%;
+	}
+	99% {
+		opacity: 0;
+		left: 100%;
+	}
+	100% {
+		opacity: 0;
+		left: 0%;
+	}
+}

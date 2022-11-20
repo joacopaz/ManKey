@@ -1,0 +1,258 @@
+/* Post styles */
+
+.post.exclusive,
+.commentItem {
+	max-height: unset;
+	width: 100%;
+	max-width: 750px;
+}
+.post.exclusive {
+	margin-bottom: 0;
+	border: none;
+	padding-bottom: 0;
+	border-radius: 0;
+}
+
+.post.exclusive .content.media img {
+	max-height: 75vh;
+}
+.post.exclusive > * {
+	margin: 0.5rem 0;
+}
+
+.content.comments.exclusive:hover {
+	background-color: unset;
+	cursor: default;
+}
+.link {
+	text-align: center;
+	color: blue;
+	text-decoration: underline;
+	transition: color 100ms;
+}
+.link:hover {
+	color: grey;
+	cursor: pointer;
+}
+
+.boundryLeft {
+	position: absolute;
+	left: 0;
+	height: 100vh;
+	width: 20vw;
+}
+.boundryRight {
+	position: absolute;
+	right: 0;
+	height: 100vh;
+	width: 20vw;
+}
+.post.exclusive .flair {
+	border-radius: 0;
+}
+.postClickListen {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 43px);
+	left: 0;
+	top: 0;
+	z-index: 500;
+}
+
+/* Comment list style */
+
+.commentList {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	list-style: none;
+	color: white;
+}
+.commentsAll {
+	display: flex;
+	justify-content: center;
+}
+.commentsAll > .commentList {
+	position: relative;
+	width: fit-content;
+	overflow: hidden;
+	background-color: var(--postBackground);
+	padding-bottom: 2rem;
+}
+
+/* Individual comment style */
+
+.md {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.md ul {
+	padding-left: 1rem;
+}
+.md p + p {
+	margin: 0.2rem 0;
+}
+.md ol {
+	padding-left: 1rem;
+}
+.op {
+	color: rgb(255, 123, 0);
+	font-weight: bold;
+}
+.toggleDisplayListener {
+	position: absolute;
+	top: 3.2rem;
+	left: 1.3rem;
+	z-index: 22;
+	width: 12px;
+	height: calc(100% - 25px);
+	cursor: pointer;
+}
+.toggleDisplay {
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 3.2rem;
+	left: 1.3rem;
+	border: grey solid 1px;
+	background-color: var(--postBackground);
+	z-index: 21;
+	filter: grayscale(0%);
+	background-size: 60%;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	transition: filter 200ms, border-color 200ms;
+}
+.toggleDisplay.expanded {
+	background-image: url("../../assets/contract.png");
+}
+.toggleDisplay.contracted {
+	background-image: url("../../assets/expand.png");
+}
+.toggleDisplay:hover {
+	filter: grayscale(50%);
+	border-color: white;
+}
+.toggleDisplayListener:hover + .toggleDisplay {
+	filter: grayscale(50%);
+	border-color: white;
+}
+
+.commentItem {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5rem;
+	position: relative;
+	caret-color: transparent;
+}
+
+.commentAuthor {
+	align-self: flex-start;
+	display: flex;
+	align-items: center;
+	font-size: 0.8rem;
+	z-index: 3;
+	background-color: var(--postBackground);
+}
+
+.commentItem .emojiContainer {
+	font-size: 0.68rem;
+	border-radius: 0;
+	align-self: flex-start;
+	position: relative;
+	left: 2.7rem;
+	bottom: 0.52rem;
+	z-index: 20;
+}
+
+.commentItem.topLevel > .commentAuthor {
+	z-index: 6;
+}
+
+.commentItem .thread {
+	width: 2px;
+	height: calc(100%);
+	background-color: #454545;
+	position: absolute;
+	top: 2.5rem;
+	left: 1.6rem;
+	z-index: 1;
+	transition: background-color 200ms;
+}
+
+.commentBody {
+	align-self: flex-start;
+	padding-left: 28px;
+	font-size: 0.8rem;
+}
+
+.commentIcon {
+	width: 40px;
+	height: 40px;
+	padding: 5px;
+	background-color: var(--postBackground);
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 0.2rem;
+	z-index: 2;
+}
+.commentButtons {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+.commentItem a {
+	color: white;
+}
+.commentItem.topLevel:last-child .thread {
+	display: none;
+}
+
+.commentsAll > .commentList > li:nth-last-child(2) .thread {
+	height: 90%;
+}
+
+/* Expand buttons */
+
+.seeMore {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 20px;
+	cursor: pointer;
+	align-self: flex-start;
+	background-color: var(--postBackground);
+	z-index: 5;
+	top: -1px;
+	left: 3rem;
+	border: solid gray 1px;
+	font-size: 0.7rem;
+	padding: 5px;
+	min-width: 7rem;
+}
+.seeMore:hover {
+	color: grey;
+}
+.new,
+.new * {
+	animation-duration: 2s;
+	animation-name: new;
+	animation-iteration-count: 1;
+}
+@keyframes new {
+	from {
+		background-color: rgb(50, 67, 50);
+	}
+	to {
+		background-color: var(--postBackground);
+	}
+}

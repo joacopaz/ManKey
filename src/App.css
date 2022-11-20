@@ -1,0 +1,607 @@
+/* Global styles */
+
+:root {
+	--background: rgb(169, 215, 255);
+	/* --background: white; */
+	--headerBackground: #2b2b2b;
+	--headerColor: white;
+	--postBackground: #2b2b2b;
+	--backgroundImg: url("./logo-nocolor2.png"), url("./assets/logo-upscale.png");
+	--backgroundSize: 300px 300px, 140px 40px;
+	--backgroundRepeat: no-repeat;
+	--backgroundPosition: 50% 80%, 99% 99%, 1% 1%;
+	--introColor: rgb(0, 0, 0);
+	--navbarColor: white;
+	--navbarActive: rgba(197, 194, 194, 0.875);
+	--titleColor: rgb(0, 0, 0);
+	--ldbar: white;
+	/* --ldbarBkg: rgb(96, 120, 129); */
+	--postButtonsHover: #3a3939;
+	/* --postHoverBorder: rgb(255, 131, 16) solid 1px; */
+	--postBorderWidth: 1px;
+	--postHoverBorder: rgb(255, 131, 16) solid var(--postBorderWidth);
+	--commentHoverBkg: rgba(118, 118, 118, 0.327);
+	--backgroundAttachment: fixed;
+}
+* {
+	padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+}
+html {
+	background-repeat: no-repeat;
+	min-height: 100vh;
+	background-position: var(--backgroundPosition);
+	background-color: var(--background);
+	background-image: var(--backgroundImg);
+	background-size: var(--backgroundSize);
+	background-repeat: var(--backgroundRepeat);
+	background-attachment: var(--backgroundAttachment);
+}
+.loading {
+	text-align: center;
+	background-color: var(--background);
+	color: var(--titleColor);
+	margin: 1rem auto;
+	padding: 1rem;
+	width: max-content;
+}
+.App {
+	position: relative;
+	top: 6vh;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+/* Header */
+
+header {
+	height: 59px;
+	min-height: 50px;
+	color: var(--headerColor);
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	/* position: relative; */
+	border-bottom: #fffdfd 1px groove;
+	background-color: var(--headerBackground);
+	position: fixed;
+	width: 100vw;
+	z-index: 1000;
+	padding-top: 0.65rem;
+	top: 0;
+	transition: height 1s;
+}
+.headerContent {
+	display: flex;
+	align-items: center;
+}
+.subRedditInHeader {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 3.5rem;
+	transition-delay: 1000ms;
+	transition: opacity 500ms linear;
+	font-size: 2rem;
+	font-weight: bold;
+}
+.show {
+	opacity: 100;
+}
+.hide {
+	opacity: 0;
+}
+header.stucked {
+	height: 100px;
+}
+
+header h2 {
+	left: 1rem;
+	position: absolute;
+}
+header h3 {
+	right: 1rem;
+	position: absolute;
+}
+.favoritesLink,
+.recommendedLink {
+	position: absolute;
+	left: -6rem;
+	color: var(--navbarColor);
+	text-decoration: underline;
+	transition: color 200ms;
+}
+.favoritesLink:hover,
+.recommendedLink:hover {
+	color: rgb(192, 192, 192);
+}
+.recommendedLink {
+	left: -14rem;
+}
+.navbar {
+	display: flex;
+	position: relative;
+	align-items: center;
+}
+
+.active {
+	color: var(--navbarActive);
+	text-decoration: none;
+}
+
+.searchBar {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	gap: 10px;
+	position: relative;
+	color: rgb(73, 42, 17);
+}
+.searchBar .search {
+	max-height: 35px;
+}
+.searchBar button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.searchBar button img {
+	transition: 100ms filter linear;
+	filter: invert(0%);
+}
+.searchBar button:hover img {
+	filter: invert(40%);
+}
+.searchBar input {
+	caret-color: auto;
+	text-align: center;
+	height: 2rem;
+	padding: 1px;
+	width: 20rem;
+	font-size: 1.2rem;
+	border-radius: 15px;
+	border: solid black 1px;
+	padding: 0 40px;
+}
+.searchBar input::placeholder {
+	/* color: rgb(94, 34, 149); */
+	background-color: unset; /* filler for empty rule warn */
+}
+.searchBarLogo {
+	position: absolute;
+	left: -2.9rem;
+	top: -0.4rem;
+	width: 45px;
+	display: none;
+}
+.about {
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1rem auto;
+	width: fit-content;
+	background-color: var(--background);
+	color: var(--introColor);
+}
+ol .about {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	text-align: left;
+	width: fit-content;
+	width: 100%;
+	padding-left: 5rem;
+}
+.about.aligned li {
+	margin: 1rem;
+}
+@media only screen and (max-width: 1210px) {
+	header h3 {
+		display: none;
+	}
+	header {
+		justify-content: right;
+	}
+	.searchBar {
+		margin-right: 1rem;
+	}
+}
+@media only screen and (max-width: 850px) {
+	header h2 {
+		display: none;
+	}
+	header {
+		justify-content: flex-end;
+	}
+	header.stucked {
+		height: 110px;
+	}
+	.subRedditInHeader {
+		top: 4rem;
+	}
+}
+@media only screen and (max-width: 635px) {
+	.favoritesLink {
+		left: -4rem;
+		font-size: 0.9rem;
+	}
+	.recommendedLink {
+		left: -11.2rem;
+		font-size: 0.9rem;
+	}
+}
+/* Body - Favorites */
+
+.subReddits.favorites {
+	margin-top: 2rem;
+	width: fit-content;
+	border-radius: 10px;
+}
+.subReddits.favorites li {
+	padding: 0;
+}
+.favHeader {
+	margin: 1rem auto;
+	text-align: center;
+	width: fit-content;
+	color: var(--titleColor);
+	background-color: var(--background);
+	border-radius: 10px;
+	caret-color: transparent;
+}
+
+/* Body - Subreddits */
+.subReddits {
+	display: flex;
+	flex-direction: column;
+	width: 665px;
+	margin: 0.5rem auto 0 auto;
+	max-height: 845px;
+	flex-wrap: wrap;
+	align-items: center;
+	background-color: var(--background);
+	border-radius: 10px;
+}
+
+.subReddits ::selection {
+	color: none;
+	background: none;
+}
+
+.subReddits li {
+	list-style: none;
+	margin: 0.2rem auto;
+	width: fit-content;
+	min-width: 320px;
+	padding: 0 0.4rem;
+}
+@media only screen and (max-width: 663px) {
+	.subReddits {
+		width: 100%;
+		max-height: unset;
+	}
+	.subReddits li {
+		list-style: none;
+		margin: 0.2rem auto;
+		width: fit-content;
+		min-width: 320px;
+		padding: 0 0.4rem;
+	}
+}
+.buttonContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	padding: 0 2rem;
+	width: 300px;
+	background-color: var(--background);
+	color: white;
+}
+.next,
+.prev {
+	margin: 1rem auto;
+	width: fit-content;
+	padding: 0.5rem 1rem;
+	border-radius: 10px;
+	background: none;
+	outline: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+	background-color: darkgreen;
+	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
+	transition: background-color 100ms, transform 100ms;
+	caret-color: transparent;
+}
+.next:hover,
+.prev:hover {
+	background-color: #4caf50;
+}
+.next:focus,
+.prev:focus {
+	background-color: rgb(5, 60, 5);
+	transform: scale(1.2);
+}
+.prev {
+	right: unset;
+	left: 2rem;
+}
+.prev:disabled,
+.next:disabled {
+	background-color: grey;
+}
+/* Body - Subreddit */
+
+.subReddit {
+	text-align: left;
+	width: 320px;
+	outline: rgba(255, 255, 255, 0) solid 2px;
+	border-radius: 10px;
+	height: 4rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	position: relative;
+	padding: 0.5rem;
+	cursor: pointer;
+	caret-color: transparent;
+	transition: 200ms background-color, 200ms outline, 200ms color;
+	background-color: #ffffff;
+}
+.subReddit:hover {
+	background-color: #ffffff;
+	outline: rgb(11, 79, 225) solid 2px;
+	color: black;
+}
+.subReddit:focus {
+	background-color: rgb(97, 176, 249);
+	color: white;
+	border-color: white;
+}
+.clickableSubredditLink {
+	position: absolute;
+	z-index: 4;
+}
+.one {
+	height: 100%;
+	left: 0;
+	width: 53%;
+}
+.clickableSubredditLink.two {
+	top: 0;
+	width: 53%;
+	height: 35%;
+}
+.clickableSubredditLink.three {
+	right: 0;
+	height: 100%;
+	width: 18%;
+}
+
+.subReddit h3 {
+	position: absolute;
+	left: 0.5rem;
+	top: 0.3rem;
+}
+
+.subReddit .icon {
+	max-height: 100%;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.subReddit .subs {
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0.5rem;
+}
+.subReddit .seeMore {
+	position: relative;
+	top: 25%;
+	right: 1%;
+	font-size: 0.8rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+	background-color: rgb(4, 179, 4);
+	transition: background-color 200ms, transform 200ms;
+}
+.subReddit .seeMore:hover {
+	background-color: rgb(9, 149, 9);
+	transform: scale(1.05);
+}
+
+.enter {
+	background: none;
+	border: none;
+	padding: 1rem;
+	font-size: 1.34rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+	background-color: rgb(63, 40, 240);
+	transition: background-color 200ms, transform 200ms;
+	cursor: pointer;
+}
+.enter.sub::selection {
+	background-color: none;
+}
+.subReddit .enter {
+	position: relative;
+	top: 25%;
+	right: 1%;
+	font-size: 0.8rem;
+	border-radius: 15px;
+	padding: 0.3rem 0.5rem;
+	color: white;
+}
+
+.enter:hover,
+.enter:focus {
+	background-color: rgb(31, 8, 234);
+	transform: scale(1.1);
+}
+.enter:active {
+	background-color: rgb(129, 3, 158);
+}
+
+.subReddit .favorite {
+	width: 25px;
+	position: relative;
+	top: 25%;
+	right: 5%;
+}
+
+.favorite {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: transform 200ms;
+}
+
+.favorite.inactive:hover {
+	background-image: url("./assets/star-hover.png");
+}
+.favorite.active {
+	background-image: url("./assets/star.png");
+}
+.favorite.inactive {
+	background-image: url("./assets/star-empty.png");
+}
+
+/* Body - popup */
+
+.outerPopup {
+	position: fixed;
+	display: flex;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.578);
+	z-index: 1000;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup {
+	position: relative;
+	width: 80%;
+	background-color: white;
+	border: rgb(71, 69, 69) solid 1px;
+	z-index: 1000;
+	border-radius: 50px;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	caret-color: transparent;
+	padding-bottom: 2rem;
+	max-width: 500px;
+	bottom: 5rem;
+}
+
+.popup .close {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	background: none;
+	width: 10%;
+	height: 10%;
+	color: red;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	cursor: pointer;
+	background-image: url("./assets/close-black.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.popup .close:hover {
+	filter: opacity(100%);
+	background-image: url("./assets/close.png");
+}
+
+.popup h1 {
+	margin: 1rem;
+	max-width: 84%;
+	align-self: flex-start;
+	overflow-wrap: break-word;
+}
+.popup p {
+	margin: 1rem;
+}
+
+.popup img {
+	width: 20%;
+	height: auto;
+	max-height: 100%;
+	display: block;
+}
+.popup .enter {
+	margin: 1rem;
+}
+
+/* Mobile styles */
+
+@media only screen and (max-width: 590px) {
+	header {
+		height: 80px;
+		align-items: flex-start;
+		justify-content: center;
+		padding-top: 0.4rem;
+	}
+	.App {
+		top: 7vh;
+	}
+
+	.navbar {
+		position: relative;
+		bottom: -1.5rem;
+		left: 5rem;
+	}
+
+	.searchBar {
+		flex-direction: column;
+	}
+	.searchBar input {
+		padding: 0;
+		padding-right: 20px;
+		width: 15rem;
+		font-size: 1rem;
+	}
+	.searchBar .search {
+		max-height: 20px;
+		position: absolute;
+		right: -25px;
+		top: 25px;
+		transform: translateY(-50%);
+	}
+
+	.favoritesLink {
+		position: unset;
+		margin-top: 0.5rem;
+	}
+	.subReddits li {
+		padding: 0;
+	}
+	.popup {
+		width: 92%;
+	}
+}
