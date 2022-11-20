@@ -1,6 +1,6 @@
 # Mankey - Reddit's easy mode
 
-[See the App]{https://mankey.netlify.app/}
+[See the App here](https://mankey.netlify.app/)
 
 Mankey is a high performance oriented app that seeks to bring Reddit's content to the client without the need of generating users, popups or downloading an app.
 
