@@ -9,7 +9,7 @@ import { selectFavorites } from "./features/favorites/favoritesSlice";
 import { Routes, Route } from "react-router-dom";
 import { Favorites } from "./features/favorites/Favorites";
 import { Post } from "./features/post/Post";
-import { Recommended } from "./features/Recommended";
+import {Recommended} from './features/recommended/Recommended'
 
 function App() {
 	const hasError = useSelector(selectHasError);
