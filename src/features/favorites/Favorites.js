@@ -14,13 +14,12 @@ export function Favorites({ favorites }) {
 	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
 		dispatch(fetchFavorites(favorites));
-	}, []);
+	}, [favorites, dispatch]);
 	const resultsRef = useRef(null);
 
 	return (
 		<>
-			{" "}
-			{favorites.length === 0 && resultsRef.current?.childNodes.length === 1 && (
+			{favorites.length === 0 ? (
 				<div>
 					<h1 className="favHeader">
 						Welcome to <span style={{ color: "rgb(97, 48, 8)" }}>Man</span>
@@ -36,15 +35,19 @@ export function Favorites({ favorites }) {
 						<li>Enjoy the memes without hassle</li>
 					</ol>
 				</div>
+			) : (
+				""
 			)}
 			{favsAreLoading ? (
 				<p className={"loading"}>Loading...</p>
-			) : (
+			) : favorites.length > 0 ? (
 				resultsRef.current?.childNodes.length !== 1 && (
 					<h1 className="favHeader">Favorites</h1>
 				)
+			) : (
+				""
 			)}
-			{favsAreLoading && (
+			{favsAreLoading ? (
 				<div className="center">
 					<div className="lds-ring">
 						<div></div>
@@ -53,6 +56,8 @@ export function Favorites({ favorites }) {
 						<div></div>
 					</div>
 				</div>
+			) : (
+				""
 			)}
 			<ul className="subReddits favorites" ref={resultsRef}>
 				{fetchedFavorites.map((favorite, i) => (
