@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 import {
 	fetchFavorites,
-	selectFavHasError,
 	selectFavIsLoading,
 	selectFavoritesFetched,
 } from "./favoritesSlice";
@@ -11,7 +10,6 @@ export function Favorites({ favorites }) {
 	const dispatch = useDispatch();
 	const fetchedFavorites = useSelector(selectFavoritesFetched);
 	const favsAreLoading = useSelector(selectFavIsLoading);
-	const favsHaveError = useSelector(selectFavHasError);
 	useEffect(() => {
 		dispatch(fetchFavorites(favorites));
 	}, [favorites, dispatch]);
