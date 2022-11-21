@@ -9,6 +9,7 @@ import { selectFavorites } from "./features/favorites/favoritesSlice";
 import { Routes, Route } from "react-router-dom";
 import { Favorites } from "./features/favorites/Favorites";
 import { Post } from "./features/post/Post";
+import { Random } from "./features/recommended/Random";
 import { Recommended } from "./features/recommended/Recommended";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 			<Routes>
 				<Route path="*" element={<Favorites favorites={favorites} />} />
 				<Route path="search" element={<Subreddits />} />
+				<Route path="/r/random" element={<Random />} />
 				<Route path="/r/:subReddit" element={<SubReddit />} />
 				<Route path="/r/:subReddit/:post" element={<Post />} />
 				<Route path="recommended" element={<Recommended />} />

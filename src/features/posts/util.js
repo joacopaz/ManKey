@@ -268,6 +268,43 @@ export const getMoreComments = async (parentId, id) => {
 	}
 };
 
+export const fetchRecommended = async (recommended) => {
+	try {
+		if (!recommended) return;
+		const fetchedRecommended = await Promise.all(
+			recommended.map(async (sub) => {
+				const endpoint = `https://www.reddit.com/${sub}/about.json`;
+				const response = await fetch(endpoint, options);
+				if (!response.ok) {
+					alert(
+						"Network error, please check your connections and any potential blockers"
+					);
+					return;
+				}
+				const jsonResponse = await response.json();
+				const data = jsonResponse.data;
+				let icon = data.community_icon;
+				if (icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)) {
+					icon = icon.match(/(.*)(.png|.jpg|.jpeg|.PNG|.JPG|.JPEG)/)[0];
+				}
+				return {
+					title: data.display_name_prefixed,
+					subscribers: data.subscribers,
+					description: data.public_description,
+					createdAgo: calculateTime(data.created * 1000),
+					created: new Date(data.created * 1000).toDateString(),
+					nsfw: data.over18,
+					url: data.url,
+					icon: icon,
+				};
+			})
+		);
+		return fetchedRecommended;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const recommended = [
 	"r/AskReddit",
 	"r/IAmA",
@@ -282,7 +319,6 @@ export const recommended = [
 	"r/cringepics",
 	"r/cringe",
 	"r/JusticePorn",
-	"r/MorbidReality",
 	"r/rage",
 	"r/mildlyinfuriating",
 	"r/creepy",
@@ -340,7 +376,6 @@ export const recommended = [
 	"r/AdviceAnimals",
 	"r/fffffffuuuuuuuuuuuu",
 	"r/4chan",
-	"r/ImGoingToHellForThis",
 	"r/firstworldanarchists",
 	"r/circlejerk",
 	"r/MURICA",
@@ -352,7 +387,6 @@ export const recommended = [
 	"r/comics",
 	"r/nottheonion",
 	"r/britishproblems",
-	"r/TumblrInAction",
 	"r/onetruegod",
 	"r/pics",
 	"r/videos",

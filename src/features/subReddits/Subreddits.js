@@ -22,12 +22,9 @@ export function Subreddits() {
 	const hasError = useSelector(selectHasError);
 	const dispatch = useDispatch();
 	const term = useSelector(selectTerm);
-	let fetching = false;
 	useEffect(() => {
-		if (fetching) return;
 		if (term) dispatch(fetchSubreddits(term));
 		if (!term) navigate("/");
-		return () => (fetching = false);
 	}, [dispatch, term, navigate]);
 	const handleClick = (e) =>
 		e.target.name === "next"
@@ -36,6 +33,7 @@ export function Subreddits() {
 
 	return (
 		<>
+			{hasError && <h1 className="favHeader">Network error</h1>}
 			{isLoading && <p className={"loading"}>Loading...</p>}
 			{isLoading && (
 				<div className="center">
@@ -84,7 +82,7 @@ export function Subreddits() {
 								tabIndex={120}>
 								Prev
 							</button>
-							<div>
+							<div className="pg">
 								{isLoadingPage ? (
 									<div className="center">
 										<div className="lds-ring small">

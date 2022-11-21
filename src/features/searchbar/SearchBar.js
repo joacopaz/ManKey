@@ -21,9 +21,16 @@ export function SearchBar() {
 			{" "}
 			<div className="navbar">
 				<NavLink
-					to="/recommended"
+					to="/r/random"
 					end
 					tabIndex={1}
+					className={(e) => (e.isActive ? "randomLink active" : "randomLink")}>
+					Random!
+				</NavLink>
+				<NavLink
+					to="/recommended"
+					end
+					tabIndex={2}
 					className={(e) =>
 						e.isActive ? "recommendedLink active" : "recommendedLink"
 					}>
@@ -32,7 +39,7 @@ export function SearchBar() {
 				<NavLink
 					to="/"
 					end
-					tabIndex={1}
+					tabIndex={3}
 					className={(e) =>
 						e.isActive ? "favoritesLink active" : "favoritesLink"
 					}>
