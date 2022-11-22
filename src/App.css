@@ -103,6 +103,7 @@ header {
 }
 .hide {
 	opacity: 0;
+	z-index: -1000;
 }
 header.stucked {
 	height: 100px;
@@ -124,6 +125,7 @@ header h3 {
 	color: var(--navbarColor);
 	text-decoration: underline;
 	transition: color 200ms;
+	z-index: 5000;
 }
 .favoritesLink:hover,
 .recommendedLink:hover,
@@ -550,7 +552,7 @@ ol .about {
 		justify-content: flex-end;
 	}
 	header.stucked {
-		height: 110px;
+		height: 97px;
 	}
 	.subRedditInHeader {
 		top: 4rem;
@@ -587,7 +589,7 @@ ol .about {
 
 @media only screen and (max-width: 650px) {
 	header {
-		height: 80px;
+		height: 75px;
 		align-items: flex-start;
 		justify-content: center;
 		padding-top: 0;
@@ -611,7 +613,7 @@ ol .about {
 	.navbar {
 		position: absolute;
 		left: 50%;
-		translate: -50%;
+		transform: translate(-50%);
 		bottom: 0.3rem;
 		gap: 30px;
 	}

@@ -319,6 +319,14 @@
 	margin: 0.4rem auto;
 	caret-color: transparent;
 	transition: border 200ms;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
 }
 
 .post:not(.sticky, .exclusive):hover {

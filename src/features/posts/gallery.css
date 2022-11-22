@@ -2,7 +2,9 @@
 	position: relative;
 	display: flex;
 	justify-content: center;
+
 }
+
 .carrousel {
 	position: relative;
 	display: flex;
@@ -26,6 +28,7 @@
 	z-index: 300;
 	caret-color: transparent;
 	user-select: transparent;
+	pointer-events: all;
 }
 .carrouselButton:hover {
 	background-color: rgb(93, 23, 23);
