@@ -27,7 +27,7 @@ export function Gallery({ imgs }) {
 					nextRef.current.style.animationName = "unset";
 					setAnimating(false);
 				},
-				isMobile ? 100 : 190
+				isMobile ? 0 : 190
 			);
 		} else if (target.dataset.next !== "true" && !animating) {
 			setAnimating(true);
@@ -42,7 +42,7 @@ export function Gallery({ imgs }) {
 					prevRef.current.style.animationName = "unset";
 					setAnimating(false);
 				},
-				isMobile ? 100 : 190
+				isMobile ? 0 : 190
 			);
 		}
 	};
