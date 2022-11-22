@@ -24,6 +24,7 @@ export function Video({ id, video }) {
 	const [timeoutID, setTimeoutID] = useState(false);
 	const [timeoutVideoID, setTimeoutVideoID] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
 	const fullScreen = useSelector(selectFullScreen);
 	const videoRef = useRef(null);
 	const audioRef = useRef(null);
@@ -152,7 +153,7 @@ export function Video({ id, video }) {
 						<div></div>
 					</div>
 				)}
-				{ended && (
+				{ended ? (
 					<div className="restartContainer">
 						<div
 							className="restart"
@@ -162,6 +163,20 @@ export function Video({ id, video }) {
 								play();
 							}}></div>
 					</div>
+				) : (
+					""
+				)}
+				{!playing && !ended && !loading && !hasBeenPlayed ? (
+					<div className="restartContainer">
+						<div
+							className="playNow"
+							onClick={() => {
+								setHasBeenPlayed(true);
+								play();
+							}}></div>
+					</div>
+				) : (
+					""
 				)}
 				<div className="controls" ref={controlsRef}>
 					<div
