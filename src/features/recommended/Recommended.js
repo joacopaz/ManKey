@@ -4,9 +4,16 @@ import { useQuery, useQueryClient } from "react-query";
 import { useLocation } from "react-router-dom";
 import { recommended, fetchRecommended } from "../posts/util";
 import { Subreddit } from "../subReddits/Subreddit";
+import { isMobile } from "react-device-detect";
 
 export function Recommended() {
 	const [page, setPage] = useState(1);
+	useEffect(() => {
+		if (!isMobile) return;
+		window.scrollTo(0, 0, {
+			behavior: "smooth",
+		});
+	}, [page]);
 	const [list, setList] = useState(null);
 	const location = useLocation();
 	const q = useQueryClient();
@@ -38,14 +45,14 @@ export function Recommended() {
 		);
 		refetch();
 	}, [refetch, list, page]);
-
+	const fetchingMobile = isFetching && isMobile ? true : false;
 	return (
 		<>
 			{!isError && <h1 className="favHeader">Recommended</h1>}
 			{isError && <h1 className="favHeader">Network error</h1> &&
 				console.log(error)}
-			{isLoading && <p className={"loading"}>Loading...</p>}
-			{isLoading && (
+			{(isLoading || fetchingMobile) && <p className={"loading"}>Loading...</p>}
+			{(isLoading || fetchingMobile) && (
 				<div className="center">
 					<div className="lds-ring">
 						<div></div>
@@ -56,7 +63,7 @@ export function Recommended() {
 				</div>
 			)}
 
-			{isSuccess && !isStale ? (
+			{isSuccess && !isStale && !fetchingMobile ? (
 				<>
 					<ul className="subReddits">
 						{data && info

@@ -16,11 +16,17 @@ import {
 	fetchSubredditInfo,
 	selectinfoHasError,
 } from "./postsSlice";
+import { isMobile } from "react-device-detect";
 import "./subReddit.css";
 import { Filters } from "./Filters";
 import { Warning } from "./Warning";
 
 export function SubReddit() {
+	useEffect(() => {
+		window.scrollTo(0, 0, {
+			behavior: "smooth",
+		});
+	}, []);
 	const [confirmed, setConfirmed] = useState(false);
 	const params = useParams();
 	const subReddit = params.subReddit;
@@ -44,7 +50,7 @@ export function SubReddit() {
 					? dispatch(setSticked(false))
 					: dispatch(setSticked(true)),
 			{
-				rootMargin: "-60px 0px 0px 0px",
+				rootMargin: !isMobile ? "-60px 0px 0px 0px" : "-25px 0px 0px 0px",
 				threshold: [1],
 			}
 		);
@@ -55,7 +61,7 @@ export function SubReddit() {
 			observer.disconnect();
 		};
 	}, [firstFilter, secondFilter, dispatch, subReddit]);
-	// Observer for fetching more posts
+
 	useEffect(() => {
 		if (fetching) return;
 		fetching = true;
@@ -72,8 +78,10 @@ export function SubReddit() {
 					);
 			});
 		};
+
+		// Observer for fetching more posts
 		const options = {
-			rootMargin: "0px",
+			rootMargin: isMobile ? "200px" : "0px",
 			threshold: [1],
 		};
 
@@ -101,7 +109,7 @@ export function SubReddit() {
 	if (infoHasError)
 		return (
 			<>
-				<h1 className="subRedditHeader">Oops, something went wrong </h1>
+				<h1 className="favHeader">Oops, something went wrong </h1>
 				<p className="link" onClick={() => navigate(-1)}>
 					Go back
 				</p>
@@ -113,7 +121,7 @@ export function SubReddit() {
 			{!info?.nsfw || confirmed ? (
 				<>
 					<h1
-						className={`subRedditHeader ${isStuck ? "hidden" : ""}`}
+						className={`favHeader ${isStuck ? "hidden" : ""}`}
 						ref={stickyRef}>
 						r/{subReddit}
 					</h1>

@@ -7,6 +7,11 @@ import {
 } from "./favoritesSlice";
 import { Subreddit } from "../subReddits/Subreddit";
 export function Favorites({ favorites }) {
+	useEffect(() => {
+		window.scrollTo(0, 0, {
+			behavior: "smooth",
+		});
+	}, []);
 	const dispatch = useDispatch();
 	const fetchedFavorites = useSelector(selectFavoritesFetched);
 	const favsAreLoading = useSelector(selectFavIsLoading);

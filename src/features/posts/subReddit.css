@@ -582,6 +582,9 @@
 	position: absolute;
 	z-index: 2;
 }
+.invisibleListener.mobile {
+	/* display: none; */
+}
 
 .controls {
 	opacity: 0%;
@@ -622,6 +625,12 @@
 .pause {
 	background-image: url("../../assets/pause.png");
 }
+.play.mobile,
+.pause.mobile {
+	position: relative;
+	left: -0.5rem;
+	padding: 20px;
+}
 .play:hover,
 .pause:hover,
 .mute:hover,
@@ -635,6 +644,8 @@
 }
 .seek:hover {
 	cursor: pointer;
+}
+.seek.mobile {
 }
 .restartContainer {
 	position: absolute;
@@ -684,10 +695,17 @@
 	margin: 0 0.5rem 0 1rem;
 	z-index: 402;
 }
+.mute.mobile {
+	position: relative;
+	left: -0.7rem;
+}
 .toggleFullScreen {
 	position: absolute;
-	right: 1rem;
+	right: 0.5rem;
 	background-image: url("../../assets/fullscreen.png");
+}
+.toggleFullScreen.mobile {
+	right: 0;
 }
 .volWrapper {
 	display: flex;
@@ -698,6 +716,12 @@
 	transform: translate(-100%, -40%);
 	z-index: 400;
 }
+.volWrapper.mobile {
+	display: none;
+}
+.volWrapper.mobile::before {
+	content: "VOL";
+}
 
 .vol {
 	position: relative;
@@ -707,6 +731,11 @@
 	width: 5px;
 	-webkit-appearance: slider-vertical;
 	z-index: 401;
+}
+.vol.mobile {
+	-webkit-appearance: slider-horizontal;
+	height: 5px;
+	width: 100px;
 }
 .vol:hover {
 	cursor: pointer;

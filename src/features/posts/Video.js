@@ -13,6 +13,7 @@ import {
 } from "./postsSlice";
 import isMuted from "../../assets/muted.png";
 import isUnmuted from "../../assets/unmuted.png";
+import { isMobile } from "react-device-detect";
 export function Video({ id, video }) {
 	const dispatch = useDispatch();
 	const muted = useSelector(selectMuted);
@@ -100,7 +101,7 @@ export function Video({ id, video }) {
 			<div
 				className="videoContainer"
 				ref={videoContainerRef}
-				onMouseMove={() => {
+				onPointerMove={() => {
 					if (timeoutID) return;
 					controlsRef.current.style.opacity = "100";
 					videoContainerRef.current.style.cursor = "auto";
@@ -113,10 +114,25 @@ export function Video({ id, video }) {
 						}, 5000)
 					);
 				}}
-				onMouseEnter={() => (controlsRef.current.style.opacity = "100")}
-				onMouseLeave={() => (controlsRef.current.style.opacity = "0")}>
+				onPointerEnter={() => (controlsRef.current.style.opacity = "100")}
+				onPointerLeave={() => {
+					if (!isMobile) controlsRef.current.style.opacity = "0";
+					if (timeoutID) return;
+					controlsRef.current.style.opacity = "100";
+					videoContainerRef.current.style.cursor = "auto";
+					setTimeoutID(
+						setTimeout(() => {
+							if (controlsRef.current) controlsRef.current.style.opacity = "0";
+							if (videoContainerRef.current)
+								videoContainerRef.current.style.cursor = "none";
+							setTimeoutID(false);
+						}, 5000)
+					);
+				}}>
 				<div
-					className="invisibleListener"
+					className={
+						isMobile ? "invisibleListener mobile" : "invisibleListener"
+					}
 					onClick={(e) => {
 						if (!playing) {
 							dispatch(setInteracted(false));
@@ -149,7 +165,9 @@ export function Video({ id, video }) {
 				)}
 				<div className="controls" ref={controlsRef}>
 					<div
-						className={playing ? "pause" : "play"}
+						className={`${playing ? "pause" : "play"} ${
+							isMobile ? "mobile" : ""
+						}`}
 						onClick={() => {
 							if (!playing) {
 								play();
@@ -165,18 +183,18 @@ export function Video({ id, video }) {
 					</span>
 					<input
 						ref={seekRef}
-						className="seek"
+						className={isMobile ? "seek mobile" : "seek"}
 						type="range"
 						min="0"
 						max="100"
 						step="0.01"
 						defaultValue="0"
-						onMouseDown={(e) => {
+						onPointerDown={(e) => {
 							pause();
 							dispatch(setInteracted(true));
 							videoRef.current.currentTime = parseFloat(seekRef.current.value);
 						}}
-						onMouseUp={() => {
+						onPointerUp={() => {
 							setInteracted(false);
 							videoRef.current.currentTime = parseFloat(seekRef.current.value);
 							play();
@@ -189,10 +207,10 @@ export function Video({ id, video }) {
 							)}
 					</span>
 					<div
-						className="mute"
+						className={isMobile ? "mute mobile" : "mute"}
 						ref={mutedRef}
-						onMouseOver={() => (volRef.current.style.opacity = 100)}
-						onMouseOut={() =>
+						onPointerEnter={() => (volRef.current.style.opacity = 100)}
+						onPointerLeave={() =>
 							setTimeout(() => (volRef.current.style.opacity = 0), 5000)
 						}
 						style={
@@ -217,15 +235,15 @@ export function Video({ id, video }) {
 								dispatch(setMuted(true));
 							}
 						}}></div>
-					<div className="volWrapper">
+					<div className={isMobile ? "volWrapper mobile" : "volWrapper"}>
 						<input
 							type="range"
-							orient="vertical"
+							orient={isMobile ? "horizontal" : "vertical"}
 							min="0"
 							max="100"
 							step="1"
 							defaultValue={vol}
-							onMouseUp={(e) => {
+							onPointerUp={(e) => {
 								dispatch(setVol(parseFloat(e.target.value / 100)));
 								if (!muted && e.target.value / 100 > 0 && playing) {
 									audioRef.current.currentTime = videoRef.current.currentTime;
@@ -239,11 +257,13 @@ export function Video({ id, video }) {
 								if (muted && parseFloat(e.target.value) > 0)
 									dispatch(setMuted(false));
 							}}
-							className="vol"
+							className={isMobile ? "vol mobile" : "vol"}
 							ref={volRef}></input>
 					</div>
 					<div
-						className="toggleFullScreen"
+						className={
+							isMobile ? "toggleFullScreen mobile" : "toggleFullScreen"
+						}
 						onClick={() => {
 							toggleFullScreen(videoContainerRef.current);
 						}}></div>

@@ -1,7 +1,12 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Random() {
+	useEffect(() => {
+		window.scrollTo(0, 0, {
+			behavior: "smooth",
+		});
+	}, []);
 	const navigate = useNavigate();
 	const headerRef = useRef(null);
 	useLayoutEffect(() => {
