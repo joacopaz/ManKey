@@ -242,8 +242,8 @@
 .seeMore:hover {
 	color: grey;
 }
-.commentItem.new,
-.commentItem.new * {
+.getNew,
+.getNew * {
 	animation-duration: 2s;
 	animation-name: new;
 	animation-iteration-count: 1;

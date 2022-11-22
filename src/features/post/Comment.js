@@ -95,7 +95,7 @@ export function Comment({ content, nesting, parentId, isNew }) {
 	return (
 		<li
 			className={`commentItem ${nesting === 0 ? "topLevel" : ""} ${
-				isNew ? "new" : ""
+				isNew ? "getNew" : ""
 			}`}
 			style={{
 				marginLeft: nesting ? "1rem" : 0,
