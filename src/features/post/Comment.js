@@ -37,8 +37,8 @@ export function Comment({ content, nesting, parentId, isNew }) {
 	useEffect(() => {
 		if (fetched) return;
 		fetchImg(content.author).then((img) => {
-			if (img && iconRef) iconRef.current.src = img;
-			if (!img && iconRef) {
+			if (img && iconRef && iconRef.current) iconRef.current.src = img;
+			if (!img && iconRef && iconRef.current) {
 				generateRandomBackground("50%", iconRef);
 			}
 			setFetched(true);
