@@ -2,7 +2,6 @@
 	position: relative;
 	display: flex;
 	justify-content: center;
-
 }
 
 .carrousel {
@@ -43,7 +42,7 @@
 	position: absolute;
 	display: block;
 	max-width: 100%;
-	animation-duration: 200ms;
+	animation-duration: 300ms;
 }
 .content.media .carrousel .active {
 	position: relative;

@@ -12,12 +12,16 @@ import { Video } from "./Video";
 import { useRef, useState } from "react";
 import { Tweet } from "react-twitter-widgets";
 import { Gallery } from "./Gallery";
+import { setLastPost } from "./postsSlice";
+import { useDispatch } from "react-redux";
 
-export function Posts({ content, stickies }) {
+export function Posts({ content, stickies, setScrolled }) {
 	const [oversized, setOversized] = useState(false);
+	const dispatch = useDispatch();
 	const ref = useRef(null);
 	const navigate = useNavigate();
 	const promptRef = useRef(null);
+
 	const stickyPost = () => {
 		if (!content.stickied) return "post";
 		if (stickies === 1) return "post sticky only";
@@ -28,6 +32,11 @@ export function Posts({ content, stickies }) {
 			setOversized(true);
 			e.target.classList.add("oversized");
 		}
+	};
+	const handleClick = () => {
+		setScrolled(false);
+		dispatch(setLastPost(content.id));
+		navigate(`./${content.id}`);
 	};
 	// console.log(content);
 	return (
@@ -41,7 +50,7 @@ export function Posts({ content, stickies }) {
 							? "postClickListen"
 							: ""
 					}
-					onClick={() => navigate(`./${content.id}`)}></div>
+					onClick={handleClick}></div>
 				<span className="pinned">
 					{content.stickied ? "PINNED BY MODERATORS" : ""}
 				</span>
@@ -82,7 +91,7 @@ export function Posts({ content, stickies }) {
 						: ""}
 				</li>
 
-				<li className="content" onClick={() => navigate(`./${content.id}`)}>
+				<li className="content" onClick={handleClick}>
 					{content.flair && (
 						<span
 							className="flair"
@@ -104,7 +113,7 @@ export function Posts({ content, stickies }) {
 						: content.score}
 					<span
 						className="innerScore"
-						onClick={() => navigate(`./${content.id}`)}
+						onClick={handleClick}
 						style={
 							content.score === 0
 								? { backgroundImage: `url(${neutralScore})` }
@@ -185,9 +194,7 @@ export function Posts({ content, stickies }) {
 					)}
 				</li>
 				<li className="content buttons">
-					<div
-						className="content comments"
-						onClick={() => navigate(`./${content.id}`)}>
+					<div className="content comments" onClick={handleClick}>
 						<img src={bubble} alt="#"></img>
 						{content.numComments} Comments
 					</div>

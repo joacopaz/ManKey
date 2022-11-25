@@ -211,10 +211,10 @@ export function Post() {
 					<div className="commentsAll">
 						{postData.comments.length > 0 ? (
 							<ul className="commentList" style={{ width: width }}>
-								{postData.comments.map((comment) => (
+								{postData.comments.map((comment, i) => (
 									<Comment
 										content={comment}
-										key={comment.id}
+										key={comment.id || i}
 										nesting={0}
 										parentId={content.id}
 									/>
