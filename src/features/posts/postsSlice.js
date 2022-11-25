@@ -22,6 +22,7 @@ const initialState = {
 	infoHasError: false,
 	infoLoaded: false,
 	subRedditInfo: [],
+	lastPost: "",
 };
 
 export const fetchPosts = createAsyncThunk(
@@ -185,7 +186,10 @@ export const postsSlice = createSlice({
 			state.sticked = action.payload;
 		},
 		setSubInfo: (state, action) => {
-			state.subInfo = action;
+			state.subInfo = action.payload;
+		},
+		setLastPost: (state, action) => {
+			state.lastPost = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -246,6 +250,7 @@ export const postsSlice = createSlice({
 
 export const {
 	setSubReddit,
+	setLastPost,
 	setInteracted,
 	setFilters,
 	setMuted,
@@ -262,6 +267,7 @@ export const selectInteracted = (state) => state.posts.interacted;
 export const selectSubReddit = (state) => state.posts.subReddit;
 export const selectIsLoading = (state) => state.posts.isLoading;
 export const selectIsLoadingPage = (state) => state.posts.isLoadingPage;
+export const selectLastPost = (state) => state.posts.lastPost;
 export const selectHasError = (state) => state.posts.hasError;
 export const selectPosts = (state) => state.posts.posts;
 export const selectNextPage = (state) => state.posts.nextPage;

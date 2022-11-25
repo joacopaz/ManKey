@@ -55,7 +55,6 @@ export function Comment({ content, nesting, parentId, isNew }) {
 			<>
 				{!expanded ? (
 					<div
-						key={id}
 						className="seeMore"
 						onClick={async () => {
 							setLoadingMore(true);
@@ -77,11 +76,11 @@ export function Comment({ content, nesting, parentId, isNew }) {
 					</div>
 				) : null}
 				{expanded
-					? moreComments.map((comment) => {
+					? moreComments.map((comment, i) => {
 							return (
 								<Comment
 									isNew={true}
-									key={comment.id}
+									key={comment.id || i}
 									content={comment ? comment : null}
 									nesting={nesting + 1}
 									parentId={parentId}
@@ -160,7 +159,7 @@ export function Comment({ content, nesting, parentId, isNew }) {
 				<ul className="commentList">
 					{replies.map((reply, i) => (
 						<Comment
-							key={reply.id}
+							key={reply.id || i}
 							content={reply ? reply : null}
 							nesting={nesting + 1}
 							parentId={parentId}

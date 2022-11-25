@@ -15,6 +15,8 @@ import {
 	selectSubredditInfo,
 	fetchSubredditInfo,
 	selectinfoHasError,
+	selectLastPost,
+	selectLoaded,
 } from "./postsSlice";
 import { isMobile } from "react-device-detect";
 import "./subReddit.css";
@@ -33,6 +35,19 @@ export function SubReddit() {
 	const { firstFilter } = useSelector(selectFilters);
 	const { secondFilter } = useSelector(selectFilters);
 	const dispatch = useDispatch();
+	const lastPost = useSelector(selectLastPost);
+	const loaded = useSelector(selectLoaded);
+	const [scrolled, setScrolled] = useState(false);
+	useEffect(() => {
+		if (lastPost && document.getElementById(lastPost) && !scrolled) {
+			setScrolled(true);
+			document.getElementById(lastPost).scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
+		}
+	}, [loaded, lastPost, scrolled]);
+
 	useEffect(() => {
 		dispatch(fetchSubredditInfo(subReddit));
 		dispatch(setSubReddit(subReddit));
@@ -128,7 +143,12 @@ export function SubReddit() {
 					<Filters />
 					<div className="posts">
 						{posts.map((post, i) => (
-							<Posts content={post} key={post.id} stickies={stickies.length} />
+							<Posts
+								content={post}
+								key={post.id}
+								stickies={stickies.length}
+								setScrolled={setScrolled}
+							/>
 						))}
 					</div>
 					<div ref={bottomRef} className="bottomDetector">

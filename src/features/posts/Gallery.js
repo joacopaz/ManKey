@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import { isMobile } from "react-device-detect";
 import "./gallery.css";
 
@@ -11,38 +11,53 @@ export function Gallery({ imgs }) {
 	const activeRef = useRef(null);
 	const nextRef = useRef(null);
 	const carrouselRef = useRef(null);
-
 	const nextActive = imgs[active + 1] ? active + 1 : 0;
 	const prevActive = imgs[active - 1] ? active - 1 : imgs.length - 1;
 
-	const handleClick = ({ target }) => {
-		if (target.dataset.next === "true" && !animating) {
-			setAnimating(true);
+	useLayoutEffect(() => {
+		console.log(animating);
+		if (animating && animating.next && animating.animating) {
 			nextRef.current.style.animationName = "enterRight";
 			activeRef.current.style.animationName = "exitLeft";
+		}
+		if (animating && animating.next && !animating.animating) {
+			activeRef.current.style.animationName = "unset";
+			nextRef.current.style.animationName = "unset";
+		}
+		if (animating && !animating.next && animating.animating) {
+			prevRef.current.style.animationName = "enterLeft";
+			activeRef.current.style.animationName = "exitRight";
+		}
+		if (animating && !animating.next && !animating.animating) {
+			activeRef.current.style.animationName = "unset";
+			prevRef.current.style.animationName = "unset";
+		}
+	}, [animating, active]);
+
+	const handleClick = ({ target }) => {
+		console.log(target.dataset.disabled);
+		if (target.dataset.disabled === "true") return;
+		target.dataset.disabled = "true";
+		setTimeout(() => (target.dataset.disabled = "false"), 220);
+		if (target.dataset.next === "true") {
+			setAnimating({ next: true, animating: true });
 			setTimeout(
 				() => {
 					setActive((active) => (imgs[active + 1] ? active + 1 : 0));
-					activeRef.current.style.animationName = "unset";
-					nextRef.current.style.animationName = "unset";
-					setAnimating(false);
+					setAnimating({ next: true, animating: false });
 				},
-				isMobile ? 0 : 190
+				isMobile ? 190 : 190 //190
 			);
-		} else if (target.dataset.next !== "true" && !animating) {
-			setAnimating(true);
-			prevRef.current.style.animationName = "enterLeft";
-			activeRef.current.style.animationName = "exitRight";
+		} else if (target.dataset.next !== "true") {
+			setAnimating({ next: false, animating: true });
 			setTimeout(
 				() => {
 					setActive((active) =>
 						imgs[active - 1] ? active - 1 : imgs.length - 1
 					);
-					activeRef.current.style.animationName = "unset";
-					prevRef.current.style.animationName = "unset";
-					setAnimating(false);
+					setAnimating({ next: false, animating: false });
 				},
-				isMobile ? 0 : 190
+				isMobile ? 190 : 190 //190
 			);
 		}
 	};
