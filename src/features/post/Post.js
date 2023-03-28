@@ -57,7 +57,8 @@ export function Post() {
 						onClick={() => {
 							if (content) navigate(`./${content.subReddit}`);
 							if (!content) navigate(-1);
-						}}>
+						}}
+					>
 						Go back
 					</p>
 				</>
@@ -67,7 +68,8 @@ export function Post() {
 					<ul
 						id={content.id}
 						className="post exclusive"
-						onLoad={(e) => setWidth(e.currentTarget.offsetWidth)}>
+						onLoad={(e) => setWidth(e.currentTarget.offsetWidth)}
+					>
 						<li className="content author">
 							Posted by {content.author}{" "}
 							{content.authorFlair && (
@@ -86,7 +88,8 @@ export function Post() {
 									}}
 									dangerouslySetInnerHTML={{
 										__html: applyEmojis(content.emojis, content.authorFlair),
-									}}></span>
+									}}
+								></span>
 							)}{" "}
 							{content.createdAgo}
 						</li>
@@ -107,7 +110,8 @@ export function Post() {
 										}}
 										dangerouslySetInnerHTML={{
 											__html: applyEmojis(content.emojis, content.flair),
-										}}></span>
+										}}
+									></span>
 								</>
 							)}
 						</li>
@@ -128,7 +132,8 @@ export function Post() {
 										: {
 												backgroundImage: `url(${negativeScore})`,
 										  }
-								}></span>
+								}
+							></span>
 						</li>
 						<li className="content media">
 							{content.isMedia === "image" && (
@@ -136,7 +141,8 @@ export function Post() {
 									<img
 										src={content.img}
 										alt={content.title}
-										onClick={() => window.open(content.img, "_blank")}></img>
+										onClick={() => window.open(content.img, "_blank")}
+									></img>
 								</>
 							)}
 							{content.isMedia === "video" && (
@@ -145,10 +151,11 @@ export function Post() {
 							{content.isMedia === "text" && (
 								<div
 									ref={ref}
-									className="textMedia"
+									className="textMedia exclusive"
 									dangerouslySetInnerHTML={{
 										__html: decodeHTML(content.body),
-									}}></div>
+									}}
+								></div>
 							)}
 							{content.isTweet && (
 								<Tweet
@@ -200,7 +207,8 @@ export function Post() {
 											1500
 										);
 									}
-								}}>
+								}}
+							>
 								<img src={share} alt="Share"></img> Share
 							</div>
 							<div className="prompt" ref={promptRef}>
