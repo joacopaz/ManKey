@@ -23,7 +23,7 @@ export function Favorites({ favorites }) {
 	return (
 		<>
 			{favorites.length === 0 ? (
-				<div>
+				<div className="favoritesAll">
 					<h1 className="favHeader">
 						Welcome to <span style={{ color: "rgb(97, 48, 8)" }}>Man</span>
 						<span style={{ color: "rgb(73, 42, 17)" }}>key</span>
@@ -68,9 +68,8 @@ export function Favorites({ favorites }) {
 				))}
 				<div
 					tabIndex={fetchedFavorites.length + 2}
-					onFocus={() =>
-						document.querySelector('[tabindex="1"]').focus()
-					}></div>
+					onFocus={() => document.querySelector('[tabindex="1"]').focus()}
+				></div>
 			</ul>
 		</>
 	);

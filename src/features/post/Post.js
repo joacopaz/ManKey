@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPost, resetPost, selectPost } from "./postSlice";
 import { Comment } from "./Comment";
+import Alert from "./Alert";
 
 export function Post() {
 	const { post } = useParams();
@@ -32,8 +33,27 @@ export function Post() {
 	}, [post, dispatch]);
 	const ref = useRef(null);
 	const promptRef = useRef(null);
+	const [wasAlerted, setWasAlerted] = useState(
+		localStorage.getItem("alerted") === "true"
+	);
+
 	return (
 		<>
+			{!wasAlerted ? (
+				<>
+					<div className="alert left"></div>
+					<Alert
+						message={
+							"You can go back to the subreddit by clicking on either the left or right boundaries of the screen"
+						}
+						onClose={() => {
+							setWasAlerted(true);
+							localStorage.setItem("alerted", "true");
+						}}
+					/>
+					<div className="alert right"></div>
+				</>
+			) : null}
 			{isLoading && (
 				<>
 					<p className={"loading"}>Loading...</p>

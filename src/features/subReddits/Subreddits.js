@@ -46,7 +46,7 @@ export function Subreddits() {
 				</div>
 			)}
 			{!isLoading && (
-				<>
+				<div className="subredditsAll">
 					{subReddits && subReddits.length > 0 && (
 						<h3 className="favHeader">Results for "{term}"</h3>
 					)}
@@ -66,7 +66,8 @@ export function Subreddits() {
 											textDecoration: "underline",
 											cursor: "pointer",
 										}}
-										onClick={() => navigate("/")}>
+										onClick={() => navigate("/")}
+									>
 										Go back
 									</li>
 								</>
@@ -79,7 +80,8 @@ export function Subreddits() {
 								className="prev"
 								disabled={page === 1}
 								onClick={handleClick}
-								tabIndex={120}>
+								tabIndex={120}
+							>
 								Prev
 							</button>
 							<div className="pg">
@@ -101,17 +103,17 @@ export function Subreddits() {
 								className="next"
 								onClick={handleClick}
 								disabled={!nextPage}
-								tabIndex={121}>
+								tabIndex={121}
+							>
 								Next
 							</button>
 							<div
 								tabIndex={122}
-								onFocus={() =>
-									document.querySelector('[tabindex="2"]').focus()
-								}></div>
+								onFocus={() => document.querySelector('[tabindex="2"]').focus()}
+							></div>
 						</div>
 					)}
-				</>
+				</div>
 			)}
 		</>
 	);

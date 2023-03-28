@@ -221,6 +221,10 @@ ol .about {
 
 /* Body - Favorites */
 
+.favoritesAll {
+	margin-top: 2rem;
+}
+
 .subReddits.favorites {
 	margin-top: 2rem;
 	width: fit-content;
@@ -240,6 +244,11 @@ ol .about {
 }
 
 /* Body - Subreddits */
+
+.subredditsAll {
+	margin-top: 2rem;
+}
+
 .subReddits {
 	display: flex;
 	flex-direction: column;
