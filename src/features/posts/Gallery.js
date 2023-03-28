@@ -15,7 +15,6 @@ export function Gallery({ imgs }) {
 	const prevActive = imgs[active - 1] ? active - 1 : imgs.length - 1;
 
 	useLayoutEffect(() => {
-		console.log(animating);
 		if (animating && animating.next && animating.animating) {
 			nextRef.current.style.animationName = "enterRight";
 			activeRef.current.style.animationName = "exitLeft";
@@ -35,7 +34,6 @@ export function Gallery({ imgs }) {
 	}, [animating, active]);
 
 	const handleClick = ({ target }) => {
-		console.log(target.dataset.disabled);
 		if (target.dataset.disabled === "true") return;
 		target.dataset.disabled = "true";
 		setTimeout(() => (target.dataset.disabled = "false"), 220);
@@ -79,7 +77,8 @@ export function Gallery({ imgs }) {
 						alt="Gallery"
 						ref={prevRef}
 						onLoad={() => loaded < 3 && setLoaded((prev) => prev + 1)}
-						className="inactive imgLeft"></img>
+						className="inactive imgLeft"
+					></img>
 					<img
 						src={imgs[active]}
 						alt="Gallery"
@@ -95,13 +94,15 @@ export function Gallery({ imgs }) {
 								activeRef.current.clientHeight + "px";
 							setAdjustedHeight(true);
 						}}
-						className="active"></img>
+						className="active"
+					></img>
 					<img
 						src={imgs[nextActive]}
 						alt="Gallery"
 						ref={nextRef}
 						onLoad={() => loaded < 3 && setLoaded((prev) => prev + 1)}
-						className="inactive imgRight"></img>
+						className="inactive imgRight"
+					></img>
 
 					<div className="carrouselLabel">
 						{active + 1} / {imgs.length}
@@ -110,13 +111,15 @@ export function Gallery({ imgs }) {
 				<div
 					className="carrouselButton alignRight"
 					onPointerDown={loaded > 2 ? handleClick : undefined}
-					data-next={true}>
+					data-next={true}
+				>
 					{">"}
 				</div>
 				<div
 					className="carrouselButton alignLeft"
 					onPointerDown={loaded > 2 ? handleClick : undefined}
-					data-next={false}>
+					data-next={false}
+				>
 					{"<"}
 				</div>
 			</div>
