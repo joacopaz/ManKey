@@ -4,9 +4,13 @@ import styles from "./ModalAlert.module.css";
 
 function Alert({ message, onClose }) {
 	React.useEffect(() => {
-		const listener = window.addEventListener("click", () => {
+		// Create event listener
+		const listener = () => {
 			onClose();
-		});
+		};
+		window.addEventListener("click", listener);
+
+		// Remove event listener
 		return () => window.removeEventListener("click", listener);
 	}, [onClose]);
 
