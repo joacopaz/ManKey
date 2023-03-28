@@ -90,6 +90,9 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 }
+.textMedia {
+	max-height: none;
+}
 .md ul {
 	padding-left: 1rem;
 }
