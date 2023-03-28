@@ -46,11 +46,7 @@ export function Post() {
 						message={
 							"You can go back to the subreddit by clicking on either the left or right boundaries of the screen"
 						}
-						onClose={() => {
-							setWasAlerted(true);
-							localStorage.setItem("alerted", "true");
-							console.log("storaged set");
-						}}
+						setWasAlerted={setWasAlerted}
 					/>
 					<div className="alert right"></div>
 				</>
