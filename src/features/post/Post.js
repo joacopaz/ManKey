@@ -49,6 +49,7 @@ export function Post() {
 						onClose={() => {
 							setWasAlerted(true);
 							localStorage.setItem("alerted", "true");
+							console.log("storaged set");
 						}}
 					/>
 					<div className="alert right"></div>
