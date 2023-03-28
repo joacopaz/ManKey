@@ -8,7 +8,7 @@ function Alert({ message, onClose }) {
 			onClose();
 		});
 		return () => window.removeEventListener("click", listener);
-	});
+	}, [onClose]);
 
 	return ReactDOM.createPortal(
 		<div className={styles.overlay}>
