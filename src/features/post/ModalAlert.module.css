@@ -13,9 +13,10 @@
 
 .container {
 	position: relative;
-	background-color: #fff;
+	background-color: orange;
+	color: brown;
 	border-radius: 5px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+	box-shadow: 3px 3px 0px 2px lightgreen;
 	padding: 20px;
 	transform: translateY(-100%);
 }
@@ -38,6 +39,7 @@
 	font-size: 24px;
 	cursor: pointer;
 	transition: color 200ms;
+	color: brown;
 }
 
 .close:hover {

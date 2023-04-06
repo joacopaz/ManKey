@@ -17,7 +17,7 @@ function Alert({ message, setWasAlerted }) {
 		<div ref={modalRef} className={styles.overlay}>
 			<div className={styles.container}>
 				<div className={styles.content}>
-					<button className={styles.close} onClick={() => onClose()}>
+					<button className={styles.close} onClick={onClose}>
 						&times;
 					</button>
 					<p>{message}</p>

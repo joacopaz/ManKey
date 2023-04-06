@@ -41,14 +41,14 @@ export function Post() {
 		<>
 			{!wasAlerted ? (
 				<>
-					<div className="alert left"></div>
+					<div className="alert left">&larr;</div>
 					<Alert
 						message={
 							"You can go back to the subreddit by clicking on either the left or right boundaries of the screen"
 						}
 						setWasAlerted={setWasAlerted}
 					/>
-					<div className="alert right"></div>
+					<div className="alert right">&rarr;</div>
 				</>
 			) : null}
 			{isLoading && (

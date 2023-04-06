@@ -5,7 +5,7 @@
 	--headerBackground: #2b2b2b;
 	--headerColor: white;
 	--postBackground: #2b2b2b;
-	--backgroundImg: url("./logo-nocolor2.png"), url("./assets/logo-upscale.png");
+	--backgroundImg: url("./logo.png"), url("./assets/logo-upscale.png");
 	--backgroundSize: 300px 300px, 140px 40px;
 	--backgroundRepeat: no-repeat;
 	--backgroundPosition: 50% 80%, 99% 99%, 1% 1%;
